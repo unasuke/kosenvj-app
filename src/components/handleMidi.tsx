@@ -21,9 +21,9 @@ export function HandleMidi() {
       const device = WebMidi.getInputByName("Circuit");
       if (device) {
         device.addListener("midimessage", (event) => {
-        //   if (Math.random() > 0.8 && event.message.type !== "clock") {
-        //     console.log(event.data);
-        //   }
+          if (Math.random() > 0.3 && event.message.type !== "clock") {
+            console.log(`handleMidi: ${event.data}`);
+          }
           switch (event.data[1]) {
             case knob1Number:
               setCircuit({ ...circuit, knob1: event.data[2] });
@@ -55,5 +55,11 @@ export function HandleMidi() {
     });
   }, []);
 
-  return <></>;
+  useEffect(() => {
+    setTimeout(() => {
+        setCircuit({...circuit, knob1: 1})
+    }, 5000);
+  }, [])
+
+  return <div><p style={{display: 'none'}}>handleMidi</p></div>;
 }

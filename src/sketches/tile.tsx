@@ -6,6 +6,8 @@ import emojiSymbols from "@unicode/unicode-14.0.0/Binary_Property/Emoji/symbols.
 import kanjiSymbols from "@unicode/unicode-14.0.0/Block/CJK_Unified_Ideographs/symbols.js";
 import { easeOutExpo, easeInOutExpo, easeInExpo } from "js-easing-functions";
 import { Input, WebMidi } from "webmidi";
+import { useRecoilValue } from "recoil";
+import { circuitState } from "../atoms/circuit";
 
 const symbols: string[] = [
   ...hiraganaSymbols,
@@ -162,7 +164,7 @@ export function Tile() {
   let vid: p5.MediaElement;
   let textlayer: p5.Graphics;
   let bpmTemp: number;
-  let circuit: Input|false;
+  const circuit = useRecoilValue(circuitState)
   let knob = {
     knob1: 10,
     knob2: 0,
@@ -174,7 +176,7 @@ export function Tile() {
     knob8: 0,
   }
   // const bpm = 120
-  let bpm = knob.knob1
+  let bpm = 120
   let oneBeatMillis = (60 / bpm) * 1000
   const innerWidth = window.innerWidth;
   const innerHeight = window.innerHeight;
@@ -183,20 +185,6 @@ export function Tile() {
   };
   const setup = (p: p5, canvas: Element) => {
     console.log("setup in");
-    WebMidi.enable().then(() => {
-      circuit = WebMidi.getInputByName("Circuit");
-      if (circuit === false) {
-        console.warn("not found midi device")
-      }
-
-        circuit.addListener("midimessage", (e) => {
-          switch (e.data[1]) {
-            case knob1Number:
-              knob.knob1 = e.data[2] + 50
-              break;
-          }
-        })
-    })
     p.createCanvas(innerWidth, innerHeight - 4).parent(canvas);
     // textlayer = p.createGraphics(innerWidth, innerHeight - 4);
 
@@ -231,7 +219,9 @@ export function Tile() {
   const draw = (p: p5) => {
     p.clear();
     p.background(0);
-    bpm = knob.knob1
+  // const circuit = useRecoilValue(circuitState)
+    console.dir(circuit.knob1)
+    bpm = circuit.knob1
     oneBeatMillis = (60 / bpm) * 1000
     // p.image(vid, 0, 0, innerWidth, innerHeight);
     // p.filter(p.BLUR, 1);
