@@ -4,7 +4,10 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "electron:main": "tsc src/main.ts --outDir dist/",
+    "electron:main:watch": "tsc src/main.ts --outDir dist/ --watch",
+    "electron": "electron dist/main.js"
   },
   "dependencies": {
     "@react-three/drei": "^8.3.1",
