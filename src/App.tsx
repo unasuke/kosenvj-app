@@ -3,21 +3,24 @@ import "./App.css";
 import { Tile } from "./sketches/tile";
 import { Three } from "./three";
 import { Midi } from "./midi";
+import { HandleMidi } from "./components/handleMidi";
+import { RecoilRoot } from "recoil";
 
 function App() {
   return (
-    <div className="App">
-      <div id="sketch" />
-      <Route path="/kosendj">
-        <Tile />
-      </Route>
-      <Route path="/video">
-        <Three />
-      </Route>
-      <Route path="/midi">
-        <Midi />
-      </Route>
-    </div>
+    <RecoilRoot>
+      <div className="App">
+        <HandleMidi />
+        <div id="sketch" />
+        <Route path="/kosendj">
+          <Tile />
+        </Route>
+        <Route path="/video">
+          <Three />
+        </Route>
+        <Route path="/midi">{/* <Midi /> */}</Route>
+      </div>
+    </RecoilRoot>
   );
 }
 
