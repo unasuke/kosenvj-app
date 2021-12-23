@@ -2,7 +2,7 @@ import { app, BrowserWindow } from "electron";
 
 let win: BrowserWindow;
 let videoWin: BrowserWindow;
-const SIZE = { width: 1920, height: 1080}
+const SIZE = { width: 1920, height: 1080 };
 
 const syncWindowPisitions = (x: number, y: number) => {
   if (win) {
@@ -37,7 +37,7 @@ app.whenReady().then(() => {
     // titleBarStyle: "hidden",
     autoHideMenuBar: true,
   });
-  videoWin.loadURL("http://localhost:5000/video");
+  videoWin.loadURL("http://localhost:5000/vfx");
   videoWin.addListener("resize", () => {
     videoWin.reload();
   });
