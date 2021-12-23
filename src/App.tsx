@@ -5,6 +5,7 @@ import { Three } from "./three";
 import { Midi } from "./midi";
 import { HandleMidi } from "./components/handleMidi";
 import { RecoilRoot } from "recoil";
+import {VFXTest} from "./components/vfxtest"
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
         </Route>
         <Route path="/video">
           <Three />
+        </Route>
+        <Route path="/vfx" >
+          <VFXTest />
         </Route>
         <Route path="/midi">{/* <Midi /> */}</Route>
       </div>
