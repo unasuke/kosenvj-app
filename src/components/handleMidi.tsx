@@ -39,14 +39,14 @@ export function HandleMidi() {
               break;
             case knob5Number:
               setCircuit({ ...circuit, knob5: event.data[2] });
-              break;                           
-            case knob6Number:                  
+              break;
+            case knob6Number:
               setCircuit({ ...circuit, knob6: event.data[2] });
-              break;                           
-            case knob7Number:                  
+              break;
+            case knob7Number:
               setCircuit({ ...circuit, knob7: event.data[2] });
-              break;                           
-            case knob8Number:                  
+              break;
+            case knob8Number:
               setCircuit({ ...circuit, knob8: event.data[2] });
               break;
           }
@@ -56,10 +56,14 @@ export function HandleMidi() {
   }, []);
 
   useEffect(() => {
-    setTimeout(() => {
-        setCircuit({...circuit, knob1: 1})
-    }, 5000);
-  }, [])
+    // setTimeout(() => {
+    //     setCircuit({...circuit, knob1: 1})
+    // }, 5000);
+  }, []);
 
-  return <div><p style={{display: 'none'}}>handleMidi</p></div>;
+  return (
+    <div>
+      <p style={{ display: "none" }}>handleMidi</p>
+    </div>
+  );
 }
