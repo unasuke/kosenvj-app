@@ -5,9 +5,6 @@ import katakanaSymbols from "@unicode/unicode-14.0.0/Script/Katakana/symbols.js"
 import emojiSymbols from "@unicode/unicode-14.0.0/Binary_Property/Emoji/symbols.js";
 import kanjiSymbols from "@unicode/unicode-14.0.0/Block/CJK_Unified_Ideographs/symbols.js";
 import { easeOutExpo, easeInOutExpo, easeInExpo } from "js-easing-functions";
-import { Input, WebMidi } from "webmidi";
-import { useRecoilValue } from "recoil";
-import { circuitState } from "../atoms/circuit";
 
 const symbols: string[] = [
   ...hiraganaSymbols,
@@ -24,7 +21,7 @@ const knob6Number = 85;
 const knob7Number = 86;
 const knob8Number = 87;
 
-const WIDTH = 50;
+const WIDTH = 70;
 const kokuRandom = () => {
   return (
     (Math.random() +
@@ -37,19 +34,18 @@ const kokuRandom = () => {
 };
 
 const heartbeat = (elapsed: number, duration: number) => {
-  if(elapsed / duration <= 0.3) {
-    return 1.6 * (elapsed/duration) + 1
+  if (elapsed / duration <= 0.3) {
+    return 1.6 * (elapsed / duration) + 1;
   } else {
     // const y = -0.83*(elapsed/duration) + 1.83
-    const y = -1.6*(elapsed/duration) + 1.6
+    const y = -1.6 * (elapsed / duration) + 1.6;
     if (y > 1) {
-      return y 
+      return y;
     } else {
-      return 1
+      return 1;
     }
   }
-
-}
+};
 
 class Block {
   x: number;
@@ -91,7 +87,7 @@ class Block {
   }
   reset() {
     this.startTime = this.p.millis();
-    this.duration = Math.random() * 1000;
+    this.duration = Math.random() * 5000;
     this.text = this.bannerText();
   }
   draw() {
@@ -154,8 +150,7 @@ class Block {
       c = symbols[Math.floor(Math.random() * 90)];
     }
 
-    return this.banner ? c : 
-     symbols[Math.floor(Math.random() * 90)];
+    return this.banner ? c : symbols[Math.floor(Math.random() * 90)];
   }
 }
 export function Tile() {
@@ -164,20 +159,9 @@ export function Tile() {
   let vid: p5.MediaElement;
   let textlayer: p5.Graphics;
   let bpmTemp: number;
-  const circuit = useRecoilValue(circuitState)
-  let knob = {
-    knob1: 10,
-    knob2: 0,
-    knob3: 0,
-    knob4: 0,
-    knob5: 0,
-    knob6: 0,
-    knob7: 0,
-    knob8: 0,
-  }
   // const bpm = 120
-  let bpm = 120
-  let oneBeatMillis = (60 / bpm) * 1000
+  let bpm = 164;
+  let oneBeatMillis = (60 / bpm) * 1000;
   const innerWidth = window.innerWidth;
   const innerHeight = window.innerHeight;
   const preload = (p: p5) => {
@@ -201,7 +185,7 @@ export function Tile() {
     // p.frameRate(30);
     // p.textSize(50 * heartbeat(p.millis(), 100000));
     p.textAlign(p.RIGHT, p.BASELINE);
-    bpmTemp = p.millis()
+    bpmTemp = p.millis();
 
     // for (let i = 0; i < 160; i++) {
     //   for (let j = 0; j < 90; j++) {
@@ -219,10 +203,8 @@ export function Tile() {
   const draw = (p: p5) => {
     p.clear();
     p.background(0);
-  // const circuit = useRecoilValue(circuitState)
-    console.dir(circuit.knob1)
-    bpm = circuit.knob1
-    oneBeatMillis = (60 / bpm) * 1000
+    // const circuit = useRecoilValue(circuitState)
+    oneBeatMillis = (60 / bpm) * 1000;
     // p.image(vid, 0, 0, innerWidth, innerHeight);
     // p.filter(p.BLUR, 1);
     // p.filter(p.GRAY);
@@ -233,7 +215,7 @@ export function Tile() {
     //     blocks.push(new Block(i, j, innerWidth, innerHeight, p));
     //   }
     // }
-    bpmTemp++
+    bpmTemp++;
     p.textSize(50 * heartbeat(p.millis() % oneBeatMillis, oneBeatMillis));
     blocks.forEach((block) => {
       block.draw();
