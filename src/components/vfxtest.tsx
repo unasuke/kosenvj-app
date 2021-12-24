@@ -69,11 +69,6 @@ const shaderSwitcher = (value: number): string => {
   return shaderList[value % shaderList.length];
 };
 
-// const shaderState = selector({
-//   key: 'shaderState',
-//   get: ({get}) => shaderSwitcher(get(circuitState).knob1)
-// })
-
 function VideoSelector({
   videoName,
   shaderName,
@@ -93,6 +88,7 @@ function VideoSelector({
     />
   );
 }
+
 export function VFXTest() {
   const circuit = useRecoilValue(circuitState);
   const [video, setVideo] = useState(videoFiles[0]);
@@ -129,31 +125,6 @@ export function VFXTest() {
           shaderName: shaderState,
         })} */}
         <VideoSelector videoName={video} shaderName={shaderState} />
-        {/* <VFXVideo
-          src="/assets/CLEANROOM.mp4"
-          // shader={shaderName}
-          shader={now().getSeconds() % 2 === 0 ? "sinewave" : "halftone"}
-          autoPlay
-          muted
-          width={"1000px"}
-          loop
-        /> */}
-        {/* <VFXVideo
-          src="/assets/CUTTT.mp4"
-          shader={circuit.knob1 > 50 ? "rgbShift" : "halftone"}
-          autoPlay
-          muted
-          width={"1000px"}
-          loop
-        />
-        <VFXVideo
-          src="/assets/ANGULAR.mp4"
-          shader="sinewave"
-          autoPlay
-          muted
-          width={"1000px"}
-          loop
-        /> */}
       </div>
     </VFXProvider>
   );
