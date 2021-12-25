@@ -1,17 +1,21 @@
 import { app, BrowserWindow } from "electron";
+import { debounce } from "mabiki";
 
 let win: BrowserWindow;
 let videoWin: BrowserWindow;
+let monitorWin: BrowserWindow;
 const SIZE = { width: 1920, height: 1080 };
 
 const syncWindowPisitions = (x: number, y: number) => {
-  if (win) {
-    win.setPosition(x, y);
-    win.moveTop();
-  }
-  if (videoWin) {
-    videoWin.setPosition(x, y);
-  }
+  debounce(() => {
+    if (win) {
+      win.setPosition(x, y);
+      // win.moveTop();
+    }
+    if (videoWin) {
+      videoWin.setPosition(x, y);
+    }
+  }, 1000);
 };
 
 app.whenReady().then(() => {
@@ -24,6 +28,9 @@ app.whenReady().then(() => {
   });
   win.loadURL("http://localhost:5000/kosendj");
   win.addListener("resize", () => {
+    debounce(() => {
+      win.reload();
+    }, 500);
     win.reload();
   });
   win.addListener("move", () => {
@@ -39,11 +46,16 @@ app.whenReady().then(() => {
   });
   videoWin.loadURL("http://localhost:5000/vfx");
   videoWin.addListener("resize", () => {
-    videoWin.reload();
+    debounce(() => {
+      videoWin.reload();
+    }, 500);
   });
   videoWin.addListener("move", () => {
     const p = videoWin.getPosition();
     syncWindowPisitions(p[0], p[1]);
   });
-  win.moveTop();
+  // win.moveTop();
+
+  monitorWin = new BrowserWindow();
+  monitorWin.loadURL("http://localhost:5000/monitor");
 });

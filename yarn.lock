@@ -2415,6 +2415,11 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
+mabiki@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/mabiki/-/mabiki-1.0.1.tgz#c1fa8237055d1ffe0499f193a8b3f3f9d3629331"
+  integrity sha512-uq91Ordht5o0iiIyiV/ELGzRgUh9tXRxo/JeALnxPaC7aB87A3lsgmvDn/SgWKDB8I6DA7C/LR86EHE7FQzjrw==
+
 map-stream@0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/map-stream/-/map-stream-0.0.7.tgz#8a1f07896d82b10926bd3744a2420009f88974a8"
