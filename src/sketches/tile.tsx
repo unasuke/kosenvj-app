@@ -21,7 +21,9 @@ const knob6Number = 85;
 const knob7Number = 86;
 const knob8Number = 87;
 
+const WIDTH = 80;
 const BPM = 142;
+
 const kokuRandom = () => {
   return (
     (Math.random() +
@@ -102,11 +104,11 @@ class Block {
     // console.log(aa);
     let c;
     if (this.banner) {
-      c = this.p.color(0, 200, 0, 255);
+      c = this.p.color(0, 255, 0, 255);
       // c = this.p.color("#00ff00");
     } else {
       // c = this.p.color("#00ff00");
-      c = this.p.color(0, 200, 0, aa);
+      c = this.p.color(0, 255, 0, aa);
     }
     this.p.fill(c);
     // this.p.rect(this.x, this.y, this.width, this.width);
@@ -173,13 +175,13 @@ export function Tile() {
     // textlayer = p.createGraphics(innerWidth, innerHeight - 4);
 
     // p.noCanvas();
-    vid = p.createVideo(["assets/CLEANROOM.mp4"], () => {
-      vid.hide();
-      // vid.position(0, 0);
-      vid.loop();
-      vid.volume(0);
-      // vid.play();
-    });
+    // vid = p.createVideo(["assets/CLEANROOM.mp4"], () => {
+    //   vid.hide();
+    //   // vid.position(0, 0);
+    //   vid.loop();
+    //   vid.volume(0);
+    //   // vid.play();
+    // });
     p.background(51);
     p.textFont(font);
     // p.frameRate(30);

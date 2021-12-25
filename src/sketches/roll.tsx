@@ -67,11 +67,11 @@ export function Roll() {
       logo,
       0,
       0,
-      800 * heartbeat(p.millis() % oneBeatMillis, oneBeatMillis),
-      800 * heartbeat(p.millis() % oneBeatMillis, oneBeatMillis)
+      1000 * heartbeat(p.millis() % oneBeatMillis, oneBeatMillis),
+      1000 * heartbeat(p.millis() % oneBeatMillis, oneBeatMillis)
     );
     p.pop();
-    angle += 0.2;
+    angle += 0.6;
   };
 
   return <Skecth preload={preload} setup={setup} draw={draw} />;
