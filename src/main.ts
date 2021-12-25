@@ -24,7 +24,7 @@ app.whenReady().then(() => {
     // frame: false,
     // titleBarStyle: "hidden",
     autoHideMenuBar: true,
-    opacity: 0.8,
+    opacity: 0.2,
   });
   win.loadURL("http://localhost:5000/kosendj");
   win.addListener("resize", () => {
