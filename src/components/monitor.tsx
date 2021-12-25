@@ -1,46 +1,130 @@
+import {
+  Box,
+  Button,
+  ChakraProvider,
+  extendTheme,
+  Flex,
+  ListItem,
+  Stack,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
+  ThemeConfig,
+  UnorderedList,
+  Text,
+  border,
+} from "@chakra-ui/react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { circuitState } from "../atoms/circuit";
 import { displayState, displayStateSelector } from "../atoms/display";
 
+const config: ThemeConfig = {
+  initialColorMode: "dark",
+  useSystemColorMode: false,
+};
+const theme = extendTheme({ config });
+
 export const Monitor = () => {
-  const ciruit = useRecoilValue(circuitState);
+  const circuit = useRecoilValue(circuitState);
   const [display, setDisplay] = useRecoilState(displayState);
   const [displaySelector, setDisplaySelector] =
     useRecoilState(displayStateSelector);
-  const onSelectVideo = (v) => {
-    console.log(v.target.attributes.src.nodeValue);
+  const onSelectVideo = (v: string) => {
     setDisplaySelector({
       ...display,
-      currentVideo: v.target.attributes.src.nodeValue,
+      currentVideo: v,
+    });
+  };
+  const onSelectShader = (s: string) => {
+    setDisplaySelector({
+      ...display,
+      currentShader: s,
     });
   };
 
   return (
-    <div style={{ color: "#fff", fontSize: "22px", display: "flex" }}>
-      <section>
-        <p>monitor</p>
-        <pre>{ciruit.knob1}</pre>
-        <pre>{ciruit.knob2}</pre>
-        <pre>{ciruit.knob3}</pre>
-        <pre>{ciruit.knob4}</pre>
-        <pre>{ciruit.knob5}</pre>
-        <pre>{ciruit.knob6}</pre>
-        <pre>{ciruit.knob7}</pre>
-        <pre>{ciruit.knob8}</pre>
-      </section>
-      <section>
-        <p>display</p>
-        <p>selected: {display.currentVideo}</p>
-        <ul>
-          {display.videoList.map((v) => {
-            return (
-              <li key={v}>
-                <video muted src={v} width={"300px"} onClick={onSelectVideo} />
-              </li>
-            );
-          })}
-        </ul>
-      </section>
-    </div>
+    <ChakraProvider theme={theme}>
+      <Flex>
+        <Box w="200px">
+          <Text fontSize={"xl"}>Circuit</Text>
+          <Text fontSize={"lg"}>knob1 : {circuit.knob1}</Text>
+          <Text fontSize={"lg"}>knob2 : {circuit.knob2}</Text>
+          <Text fontSize={"lg"}>knob3 : {circuit.knob3}</Text>
+          <Text fontSize={"lg"}>knob4 : {circuit.knob4}</Text>
+          <Text fontSize={"lg"}>knob5 : {circuit.knob5}</Text>
+          <Text fontSize={"lg"}>knob6 : {circuit.knob6}</Text>
+          <Text fontSize={"lg"}>knob7 : {circuit.knob7}</Text>
+          <Text fontSize={"lg"}>knob8 : {circuit.knob8}</Text>
+        </Box>
+        <Box w="200px">
+          <Text fontSize={"xl"}>Display</Text>
+          <Text fontSize={"lg"}>video : {display.currentVideo}</Text>
+          <Text fontSize={"lg"}>shader : {display.currentShader}</Text>
+        </Box>
+      </Flex>
+      <Flex flexDirection={"row"}>
+        <Box>
+          <Tabs size={"md"}>
+            <TabList>
+              <Tab>Video</Tab>
+              <Tab>Shader</Tab>
+            </TabList>
+            <TabPanels>
+              <TabPanel>
+                <Flex flexDirection={"row"} flexWrap={"wrap"}>
+                  {display.videoList.map((v) => {
+                    return (
+                      <Box key={v}>
+                        <video
+                          muted
+                          src={v}
+                          width={"300px"}
+                          onClick={() => onSelectVideo(v)}
+                          style={{
+                            borderWidth:
+                              display.currentVideo === v ? "2px" : "0px",
+                            borderColor: "#f00",
+                            borderStyle: "solid",
+                            boxSizing: "border-box",
+                          }}
+                          onMouseEnter={(e) => {
+                            if (e.target.paused) {
+                              e.target.play();
+                            }
+                          }}
+                          onMouseLeave={(e) => {
+                            if (e.target.played) {
+                              e.target.pause();
+                            }
+                          }}
+                        />
+                      </Box>
+                    );
+                  })}
+                </Flex>
+              </TabPanel>
+              <TabPanel>
+                <Stack spacing={4}>
+                  {display.shaderList.map((s) => {
+                    return (
+                      <Button
+                        key={s}
+                        value={s}
+                        onClick={() => onSelectShader(s)}
+                        isActive={display.currentShader === s}
+                      >
+                        {s}
+                      </Button>
+                    );
+                  })}
+                </Stack>
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
+        </Box>
+      </Flex>
+    </ChakraProvider>
   );
 };
