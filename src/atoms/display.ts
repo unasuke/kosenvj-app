@@ -5,6 +5,7 @@ type Display = {
   currentVideo: string;
   shaderList: string[];
   currentShader: string;
+  bpm: number;
 };
 
 const videoFiles = [
@@ -44,7 +45,6 @@ const videoFiles = [
   "/assets/kewbic_flow.mp4",
   "/assets/milkcave.mp4",
   "/assets/moar.mp4",
-  "/assets/mocircshii.mov",
   "/assets/octmesh.mp4",
   "/assets/p-crawl.mp4",
   "/assets/pewpy_dollar_sign.mp4",
@@ -56,13 +56,24 @@ const videoFiles = [
   "/assets/warm_neon_birth.mp4",
 ];
 
+const shaderList = [
+  // "uvGradient",
+  // "rainbow",
+  "glitch",
+  "pixelate",
+  "rgbGlitch",
+  "rgbShift",
+  "halftone",
+];
+
 export const displayState = atom<Display>({
   key: "displayState",
   default: {
     videoList: videoFiles,
     currentVideo: videoFiles[0],
-    shaderList: [],
-    currentShader: "",
+    shaderList: shaderList,
+    currentShader: shaderList[0],
+    bpm: 120,
   },
 });
 
