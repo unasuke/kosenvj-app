@@ -24,9 +24,9 @@ app.whenReady().then(() => {
     // frame: false,
     // titleBarStyle: "hidden",
     autoHideMenuBar: true,
-    opacity: 0.2,
+    opacity: 0.5,
   });
-  win.loadURL("http://localhost:5000/kosendj");
+  win.loadURL("http://localhost:5000/rolling");
   win.addListener("resize", () => {
     debounce(() => {
       win.reload();
