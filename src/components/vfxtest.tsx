@@ -91,40 +91,39 @@ function VideoSelector({
 
 export function VFXTest() {
   const circuit = useRecoilValue(circuitState);
-  const [video, setVideo] = useState(videoFiles[0]);
-  let usedShader = "uvGradient";
+  const [video, setVideo] = useState("");
+  const [shader, setShader] = useState("");
+  const onStorageChange = (event) => {
+    // console.log(JSON.parse(event.newValue));
+    console.log("onStorageChanges");
+    if (event.key === "displayStateSelector") {
+      const value = JSON.parse(event.newValue);
+      setVideo(value.currentVideo);
+      setShader(value.currentShader);
+      console.log("called");
+    }
+  };
+
   useEffect(() => {
     const state = JSON.parse(localStorage.getItem("displayStateSelector"));
     setVideo(state.currentVideo);
+    setShader(state.currentShader);
   }, []);
+
   useEffect(() => {
-    console.log(display);
-    window.addEventListener("storage", (e) => {
-      console.log(JSON.parse(e.newValue));
-      if (e.key === "displayStateSelector") {
-        const value = JSON.parse(e.newValue);
-        setVideo(value.currentVideo);
-      }
-    });
-  }, [video]);
+    window.addEventListener("storage", onStorageChange);
+    return () => {
+      window.removeEventListener("storage", onStorageChange);
+    };
+  }, [video, shader]);
   const now = () => {
     return new Date();
   };
 
   return (
     <VFXProvider>
-      <div style={{}}>
-        {/* <VFXSpan
-          style={{ fontSize: "5rem", color: "#4e4" }}
-          shader="glitch"
-        >
-          高専DJ部
-        </VFXSpan> */}
-        {/* {VideoSelector({
-          videoName: display.currentVideo,
-          shaderName: shaderState,
-        })} */}
-        <VideoSelector videoName={video} shaderName={shaderState} />
+      <div style={{ overflow: "hidden" }}>
+        <VideoSelector videoName={video} shaderName={shader} />
       </div>
     </VFXProvider>
   );
