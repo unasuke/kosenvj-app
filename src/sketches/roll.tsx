@@ -3,6 +3,9 @@ import Skecth from "react-p5";
 import { easeOutExpo, easeInOutExpo, easeInExpo } from "js-easing-functions";
 
 const WIDTH = 80;
+
+const BPM = 150;
+
 const kokuRandom = () => {
   return (
     (Math.random() +
@@ -36,7 +39,7 @@ export function Roll() {
   let bpmTemp: number;
   let angle = 0;
   // const bpm = 120
-  let bpm = 120;
+  let bpm = BPM;
   let oneBeatMillis = (60 / bpm) * 1000;
   const innerWidth = window.innerWidth;
   const innerHeight = window.innerHeight;

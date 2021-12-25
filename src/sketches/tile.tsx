@@ -21,7 +21,7 @@ const knob6Number = 85;
 const knob7Number = 86;
 const knob8Number = 87;
 
-const WIDTH = 70;
+const BPM = 142;
 const kokuRandom = () => {
   return (
     (Math.random() +
@@ -160,7 +160,7 @@ export function Tile() {
   let textlayer: p5.Graphics;
   let bpmTemp: number;
   // const bpm = 120
-  let bpm = 164;
+  let bpm = BPM;
   let oneBeatMillis = (60 / bpm) * 1000;
   const innerWidth = window.innerWidth;
   const innerHeight = window.innerHeight;
