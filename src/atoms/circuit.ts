@@ -29,72 +29,88 @@ export const circuitKnob1State = selector<number>({
   get: ({ get }) => get(circuitState).knob1,
   set: ({ get, set }, newValue) => {
     if (typeof newValue === "number") {
-      set({ ...circuitState }, { ...get(circuitState), knob1: newValue });
+      const s = { ...get(circuitState), knob1: newValue };
+      localStorage.setItem("circuitState", JSON.stringify(s));
+      set({ ...circuitState }, s);
     }
   },
 });
 
 export const circuitKnob2State = selector<number>({
   key: "circuitKnob2State",
-  get: ({ get }) => get(circuitState).knob1,
+  get: ({ get }) => get(circuitState).knob2,
   set: ({ get, set }, newValue) => {
     if (typeof newValue === "number") {
-      set({ ...circuitState }, { ...get(circuitState), knob2: newValue });
+      const s = { ...get(circuitState), knob2: newValue };
+      localStorage.setItem("circuitState", JSON.stringify(s));
+      set({ ...circuitState }, s);
     }
   },
 });
 
 export const circuitKnob3State = selector<number>({
   key: "circuitKnob3State",
-  get: ({ get }) => get(circuitState).knob1,
+  get: ({ get }) => get(circuitState).knob3,
   set: ({ get, set }, newValue) => {
     if (typeof newValue === "number") {
-      set({ ...circuitState }, { ...get(circuitState), knob3: newValue });
+      const s = { ...get(circuitState), knob3: newValue };
+      localStorage.setItem("circuitState", JSON.stringify(s));
+      set({ ...circuitState }, s);
     }
   },
 });
 export const circuitKnob4State = selector<number>({
   key: "circuitKnob4State",
-  get: ({ get }) => get(circuitState).knob1,
+  get: ({ get }) => get(circuitState).knob4,
   set: ({ get, set }, newValue) => {
     if (typeof newValue === "number") {
-      set({ ...circuitState }, { ...get(circuitState), knob4: newValue });
+      const s = { ...get(circuitState), knob4: newValue };
+      localStorage.setItem("circuitState", JSON.stringify(s));
+      set({ ...circuitState }, s);
     }
   },
 });
 export const circuitKnob5State = selector<number>({
   key: "circuitKnob5State",
-  get: ({ get }) => get(circuitState).knob1,
+  get: ({ get }) => get(circuitState).knob5,
   set: ({ get, set }, newValue) => {
     if (typeof newValue === "number") {
-      set({ ...circuitState }, { ...get(circuitState), knob5: newValue });
+      const s = { ...get(circuitState), knob5: newValue };
+      localStorage.setItem("circuitState", JSON.stringify(s));
+      set({ ...circuitState }, s);
     }
   },
 });
 export const circuitKnob6State = selector<number>({
   key: "circuitKnob6State",
-  get: ({ get }) => get(circuitState).knob1,
+  get: ({ get }) => get(circuitState).knob6,
   set: ({ get, set }, newValue) => {
     if (typeof newValue === "number") {
-      set({ ...circuitState }, { ...get(circuitState), knob6: newValue });
+      const s = { ...get(circuitState), knob6: newValue };
+      localStorage.setItem("circuitState", JSON.stringify(s));
+      set({ ...circuitState }, s);
     }
   },
 });
 export const circuitKnob7State = selector<number>({
   key: "circuitKnob7State",
-  get: ({ get }) => get(circuitState).knob1,
+  get: ({ get }) => get(circuitState).knob7,
   set: ({ get, set }, newValue) => {
     if (typeof newValue === "number") {
-      set({ ...circuitState }, { ...get(circuitState), knob7: newValue });
+      const s = { ...get(circuitState), knob7: newValue };
+      localStorage.setItem("circuitState", JSON.stringify(s));
+      set({ ...circuitState }, s);
     }
   },
 });
 export const circuitKnob8State = selector<number>({
   key: "circuitKnob8State",
-  get: ({ get }) => get(circuitState).knob1,
+  get: ({ get }) => get(circuitState).knob8,
   set: ({ get, set }, newValue) => {
     if (typeof newValue === "number") {
-      set({ ...circuitState }, { ...get(circuitState), knob8: newValue });
+      const s = { ...get(circuitState), knob8: newValue };
+      localStorage.setItem("circuitState", JSON.stringify(s));
+      set({ ...circuitState }, s);
     }
   },
 });
