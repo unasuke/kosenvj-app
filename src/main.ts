@@ -1,5 +1,7 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, ipcMain } from "electron";
 import { debounce } from "mabiki";
+import * as fs from "node:fs";
+import * as path from "node:path";
 
 let win: BrowserWindow;
 let videoWin: BrowserWindow;
@@ -25,6 +27,9 @@ app.whenReady().then(() => {
     // titleBarStyle: "hidden",
     autoHideMenuBar: true,
     opacity: 0.5,
+    webPreferences: {
+      // preload: "dist/preload.js"
+    },
   });
   win.loadURL("http://localhost:5000/rolling");
   win.addListener("resize", () => {
@@ -43,6 +48,10 @@ app.whenReady().then(() => {
     // frame: false,
     // titleBarStyle: "hidden",
     autoHideMenuBar: true,
+    webPreferences: {
+      contextIsolation: true,
+      // preload: "./dist/preload.js"
+    },
   });
   videoWin.loadURL("http://localhost:5000/vfx");
   videoWin.addListener("resize", () => {
@@ -56,6 +65,21 @@ app.whenReady().then(() => {
   });
   // win.moveTop();
 
-  monitorWin = new BrowserWindow();
+  monitorWin = new BrowserWindow({
+    ...SIZE,
+    webPreferences: {
+      devTools: true,
+      contextIsolation: true,
+      preload: path.join(__dirname, "preload.js"),
+    },
+  });
   monitorWin.loadURL("http://localhost:5000/monitor");
+  monitorWin.webContents.openDevTools();
+});
+
+ipcMain.handle("get-video-list", async () => {
+  // const list = fs.readdirSync("assets");
+  // console.log(list)
+  console.warn("invoked");
+  return JSON.stringify({ a: "b" });
 });
