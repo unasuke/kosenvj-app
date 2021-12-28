@@ -1,6 +1,6 @@
 import { atom, selector } from "recoil";
 
-type Circuit = {
+export type Circuit = {
   knob1: number;
   knob2: number;
   knob3: number;
@@ -10,6 +10,7 @@ type Circuit = {
   knob7: number;
   knob8: number;
 };
+
 export const circuitState = atom<Circuit>({
   key: "circitState",
   default: {

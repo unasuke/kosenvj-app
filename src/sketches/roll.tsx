@@ -1,6 +1,7 @@
 import p5 from "p5";
 import Skecth from "react-p5";
-import { easeOutExpo, easeInOutExpo, easeInExpo } from "js-easing-functions";
+import { Circuit } from "../atoms/circuit";
+// import { easeOutExpo, easeInOutExpo, easeInExpo } from "js-easing-functions";
 
 const WIDTH = 80;
 
@@ -39,6 +40,13 @@ export function Roll() {
   let bpmTemp: number;
   let angle = 0;
   // const bpm = 120
+  let circuit: Circuit;
+  const getCircuitState = function () {
+    const c = JSON.parse(localStorage.getItem("circuitState"));
+    if (c !== null) {
+      circuit = c;
+    }
+  };
   let bpm = BPM;
   let oneBeatMillis = (60 / bpm) * 1000;
   const innerWidth = window.innerWidth;
@@ -49,12 +57,14 @@ export function Roll() {
   const setup = (p: p5, canvas: Element) => {
     console.log("setup in");
     p.createCanvas(innerWidth, innerHeight - 4).parent(canvas);
+    window.addEventListener("storage", getCircuitState);
     console.info("setup");
   };
 
   const draw = (p: p5) => {
     p.clear();
     p.background(0);
+    bpm = circuit?.knob1 + 100;
     oneBeatMillis = (60 / bpm) * 1000;
     // bpmTemp++;
     // p.image(logo, 0, 0, 800, 800);

@@ -5,6 +5,7 @@ import katakanaSymbols from "@unicode/unicode-14.0.0/Script/Katakana/symbols.js"
 import emojiSymbols from "@unicode/unicode-14.0.0/Binary_Property/Emoji/symbols.js";
 import kanjiSymbols from "@unicode/unicode-14.0.0/Block/CJK_Unified_Ideographs/symbols.js";
 import { easeOutExpo, easeInOutExpo, easeInExpo } from "js-easing-functions";
+import { Circuit } from "../atoms/circuit";
 
 const symbols: string[] = [
   ...hiraganaSymbols,
@@ -162,6 +163,13 @@ export function Tile() {
   let textlayer: p5.Graphics;
   let bpmTemp: number;
   // const bpm = 120
+  let circuit: Circuit;
+  const getCircuitState = function () {
+    const c = JSON.parse(localStorage.getItem("circuitState"));
+    if (c !== null) {
+      circuit = c;
+    }
+  };
   let bpm = BPM;
   let oneBeatMillis = (60 / bpm) * 1000;
   const innerWidth = window.innerWidth;
@@ -172,6 +180,7 @@ export function Tile() {
   const setup = (p: p5, canvas: Element) => {
     console.log("setup in");
     p.createCanvas(innerWidth, innerHeight - 4).parent(canvas);
+    window.addEventListener("storage", getCircuitState);
     // textlayer = p.createGraphics(innerWidth, innerHeight - 4);
 
     // p.noCanvas();
@@ -206,6 +215,7 @@ export function Tile() {
     p.clear();
     p.background(0);
     // const circuit = useRecoilValue(circuitState)
+    bpm = circuit?.knob1 + 100;
     oneBeatMillis = (60 / bpm) * 1000;
     // p.image(vid, 0, 0, innerWidth, innerHeight);
     // p.filter(p.BLUR, 1);
