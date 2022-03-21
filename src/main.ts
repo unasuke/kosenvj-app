@@ -77,7 +77,7 @@ app.whenReady().then(() => {
     },
   });
   monitorWin.loadURL("http://localhost:5000/monitor");
-  monitorWin.webContents.openDevTools();
+  // monitorWin.webContents.openDevTools();
 });
 
 ipcMain.handle("get-video-list", async () => {
