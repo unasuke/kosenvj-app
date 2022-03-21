@@ -67,6 +67,7 @@ app.whenReady().then(() => {
 
   monitorWin = new BrowserWindow({
     ...SIZE,
+    title: "monitor",
     webPreferences: {
       devTools: true,
       contextIsolation: true,
