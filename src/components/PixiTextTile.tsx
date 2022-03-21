@@ -150,7 +150,7 @@ for (let i = 0; i < body.clientWidth; i += WIDTH) {
     blocks.push(new Block(i, j, body.clientWidth, body.clientHeight, 0));
   }
 }
-const RotateLogo = ({ parentWidth, parentHeight }: RotateLogoProps) => {
+const TextTile = ({ parentWidth, parentHeight }: RotateLogoProps) => {
   const app = useApp();
   const oneBeatMillis = (60.0 / bpm) * 1000;
   const [rotation, setRotation] = useState(0);
@@ -193,7 +193,7 @@ const RotateLogo = ({ parentWidth, parentHeight }: RotateLogoProps) => {
   );
 };
 
-export const PixiTile = () => {
+export const PixiTextTile = () => {
   const body = document.getElementsByTagName("body")[0];
   return (
     <Stage
@@ -204,7 +204,7 @@ export const PixiTile = () => {
         // backgroundAlpha: 0,
       }}
     >
-      <RotateLogo
+      <TextTile
         parentWidth={body.clientWidth}
         parentHeight={body.clientHeight}
       />

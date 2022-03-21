@@ -50,7 +50,7 @@ const RotateLogo = ({ parentWidth, parentHeight }: RotateLogoProps) => {
   );
 };
 
-export const Pixi = () => {
+export const PixiRotateLogo = () => {
   const body = document.getElementsByTagName("body")[0];
   return (
     <Stage
