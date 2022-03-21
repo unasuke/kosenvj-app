@@ -18,10 +18,10 @@ function App() {
         <HandleMidi />
         <div id="sketch" />
         <Route path="/kosendj">
-          <Tile />
+          <PixiTextTile />
         </Route>
         <Route path="/rolling">
-          <Roll />
+          <PixiRotateLogo />
         </Route>
         <Route path="/video">
           <Three />
