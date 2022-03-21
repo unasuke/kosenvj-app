@@ -12,8 +12,9 @@ import {
   Text,
   Container,
 } from "@inlet/react-pixi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TextStyle } from "pixi.js";
+import { FrontSide } from "three";
 
 const WIDTH = 80;
 const symbols: string[] = [
@@ -23,7 +24,7 @@ const symbols: string[] = [
   // ...kanjiSymbols,
 ];
 
-const bpm = 160;
+const bpm = 120;
 const heartbeat = (elapsed: number, duration: number) => {
   if (elapsed / duration <= 0.3) {
     return 1.6 * (elapsed / duration) + 1;
@@ -72,7 +73,6 @@ class Block {
     } else {
       this.banner = false;
     }
-    console.log("aaaaaaaaa");
     this.reset(this.startTime);
   }
   reset(mills: number) {
@@ -91,22 +91,17 @@ class Block {
     } else {
       c = aa;
     }
-    return (
-      <Text
-        text={this.text}
-        anchor={0.5}
-        x={this.x}
-        y={this.y}
-        style={
-          new TextStyle({
-            align: "center",
-            fontFamily: '"Source Sans Pro", Helvetica, sans-serif',
-            fontSize: 50,
-            fill: `rgba(0, 255, 0, ${c})`,
-          })
-        }
-      />
-    );
+    return {
+      text: this.text,
+      x: this.x,
+      y: this.y,
+      style: new TextStyle({
+        align: "center",
+        fontFamily: "BestTen-DOT",
+        fontSize: 50 * size,
+        fill: `rgba(0, 255, 0, ${c})`,
+      }),
+    };
   }
   bannerText() {
     let c: string = "";
@@ -161,14 +156,41 @@ const RotateLogo = ({ parentWidth, parentHeight }: RotateLogoProps) => {
   const [rotation, setRotation] = useState(0);
   const [size, setSize] = useState(0);
   const [mill, setMill] = useState(0);
+  const [textStyle, setTextStyle] = useState<Block[] | null>([]);
 
-  let elapsedMillSec = 0;
+  useEffect(() => {
+    const body = document.getElementsByTagName("body")[0];
+    let style = [];
+    for (let i = 0; i < body.clientWidth; i += WIDTH) {
+      for (let j = 0; j < body.clientHeight; j += WIDTH) {
+        style.push(new Block(i, j, body.clientWidth, body.clientHeight, 0));
+      }
+    }
+    setTextStyle(style);
+  }, []);
+
   useTick((delta, ticker) => {
     setMill(mill + ticker.elapsedMS);
     setRotation(rotation + 0.01);
     setSize(heartbeat(mill % oneBeatMillis, oneBeatMillis));
   });
-  return <Container>{blocks.map((b) => b.draw(mill, size))}</Container>;
+  return (
+    <Container>
+      {textStyle.map((s) => {
+        let style = s.draw(mill, size);
+        return (
+          <Text
+            key={`${style.x}${style.y}`}
+            text={style.text}
+            anchor={0.5}
+            x={style.x}
+            y={style.y}
+            style={style.style}
+          />
+        );
+      })}
+    </Container>
+  );
 };
 
 export const PixiTile = () => {
