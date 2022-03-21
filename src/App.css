@@ -45,3 +45,8 @@ body {
 button {
   font-size: calc(10px + 2vmin);
 }
+
+@font-face {
+  font-family: BestTen-DOT;
+  src: url("/assets/BestTen-DOT.otf");
+}
