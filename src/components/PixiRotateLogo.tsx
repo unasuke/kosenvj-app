@@ -1,7 +1,3 @@
-import hiraganaSymbols from "@unicode/unicode-14.0.0/Script/Hiragana/symbols.js";
-import katakanaSymbols from "@unicode/unicode-14.0.0/Script/Katakana/symbols.js";
-import emojiSymbols from "@unicode/unicode-14.0.0/Binary_Property/Emoji/symbols.js";
-import kanjiSymbols from "@unicode/unicode-14.0.0/Block/CJK_Unified_Ideographs/symbols.js";
 import { easeOutExpo, easeInOutExpo, easeInExpo } from "js-easing-functions";
 import { Circuit } from "../atoms/circuit";
 import { Stage, Sprite, useTick, useApp } from "@inlet/react-pixi";
