@@ -8,6 +8,8 @@ import { RecoilRoot } from "recoil";
 import { VFXTest } from "./components/vfxtest";
 import { Monitor } from "./components/monitor";
 import { Roll } from "./sketches/roll";
+import { Pixi } from "./components/pixi";
+import { PixiTile } from "./components/pixi_tile";
 
 function App() {
   return (
@@ -30,6 +32,10 @@ function App() {
         <Route path="/midi">{/* <Midi /> */}</Route>
         <Route path="/monitor">
           <Monitor />
+        </Route>
+        <Route path="/pixi">
+          {/* <Pixi /> */}
+          <PixiTile />
         </Route>
       </div>
     </RecoilRoot>
