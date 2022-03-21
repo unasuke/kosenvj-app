@@ -109,7 +109,7 @@ export const Monitor = () => {
             <TabPanels>
               <TabPanel>
                 <Flex flexDirection={"row"} flexWrap={"wrap"}>
-                  {display.videoList.map((v) => {
+                  {display.videoList?.map((v) => {
                     return (
                       <Box key={v}>
                         <video
@@ -143,7 +143,7 @@ export const Monitor = () => {
               </TabPanel>
               <TabPanel>
                 <Stack spacing={4}>
-                  {display.shaderList.map((s) => {
+                  {display.shaderList?.map((s) => {
                     return (
                       <Button
                         key={s}
