@@ -15,6 +15,11 @@ import {
   UnorderedList,
   Text,
   border,
+  Slider,
+  SliderTrack,
+  SliderFilledTrack,
+  SliderThumb,
+  SliderMark,
 } from "@chakra-ui/react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { circuitState } from "../atoms/circuit";
@@ -68,6 +73,30 @@ export const Monitor = () => {
           <Text fontSize={"xl"}>Display</Text>
           <Text fontSize={"lg"}>video : {display.currentVideo}</Text>
           <Text fontSize={"lg"}>shader : {display.currentShader}</Text>
+        </Box>
+        <Box w="200px" p={10}>
+          <Slider
+            defaultValue={display.bpm}
+            onChange={(val) => setDisplaySelector({ ...display, bpm: val })}
+            min={60}
+            max={200}
+          >
+            <SliderMark
+              value={display.bpm}
+              textAlign="center"
+              bg="blue.500"
+              color="white"
+              mt="-10"
+              ml="-5"
+              w="12"
+            >
+              {display.bpm}
+            </SliderMark>
+            <SliderTrack>
+              <SliderFilledTrack />
+            </SliderTrack>
+            <SliderThumb />
+          </Slider>
         </Box>
       </Flex>
       <Flex flexDirection={"row"}>
