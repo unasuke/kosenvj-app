@@ -8,6 +8,8 @@ let videoWin: BrowserWindow;
 let monitorWin: BrowserWindow;
 const SIZE = { width: 1920, height: 1080 };
 
+app.commandLine.appendSwitch("disable-renderer-backgrounding");
+
 const syncWindowPisitions = (x: number, y: number) => {
   debounce(() => {
     if (win) {
