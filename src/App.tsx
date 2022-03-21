@@ -7,7 +7,7 @@ import { HandleMidi } from "./components/handleMidi";
 import { RecoilRoot } from "recoil";
 import { VFXTest } from "./components/vfxtest";
 import { Monitor } from "./components/monitor";
-import {Roll} from "./sketches/roll";
+import { Roll } from "./sketches/roll";
 
 function App() {
   return (

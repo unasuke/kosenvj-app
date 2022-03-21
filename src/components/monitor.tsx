@@ -19,7 +19,7 @@ import {
 import { useRecoilState, useRecoilValue } from "recoil";
 import { circuitState } from "../atoms/circuit";
 import { displayState, displayStateSelector } from "../atoms/display";
-import {useEffect} from "react";
+import { useEffect } from "react";
 
 const config: ThemeConfig = {
   initialColorMode: "dark",
@@ -47,8 +47,8 @@ export const Monitor = () => {
 
   useEffect(() => {
     // console.warn(window.electron.getVideoList().then(l => {console.log(l)}).catch(e => {console.warn(e)}))
-    console.warn(window.electron.getVideoList())
-  }, [])
+    console.warn(window.electron.getVideoList());
+  }, []);
 
   return (
     <ChakraProvider theme={theme}>
