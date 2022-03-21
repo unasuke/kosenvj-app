@@ -98,7 +98,7 @@ class Block {
       style: new TextStyle({
         align: "center",
         fontFamily: "BestTen-DOT",
-        fontSize: 50 * size,
+        fontSize: 50,
         fill: `rgba(0, 255, 0, ${c})`,
       }),
     };
@@ -159,7 +159,6 @@ const TextTile = ({ parentWidth, parentHeight }: RotateLogoProps) => {
   const [textStyle, setTextStyle] = useState<Block[] | null>([]);
 
   useEffect(() => {
-    const body = document.getElementsByTagName("body")[0];
     let style = [];
     for (let i = 0; i < body.clientWidth; i += WIDTH) {
       for (let j = 0; j < body.clientHeight; j += WIDTH) {
@@ -167,7 +166,7 @@ const TextTile = ({ parentWidth, parentHeight }: RotateLogoProps) => {
       }
     }
     setTextStyle(style);
-  }, []);
+  }, [body.clientWidth, body.clientHeight]);
 
   useTick((delta, ticker) => {
     setMill(mill + ticker.elapsedMS);
