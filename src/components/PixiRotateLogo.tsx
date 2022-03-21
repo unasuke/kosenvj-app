@@ -1,9 +1,11 @@
 import { easeOutExpo, easeInOutExpo, easeInExpo } from "js-easing-functions";
 import { Circuit } from "../atoms/circuit";
 import { Stage, Sprite, useTick, useApp } from "@inlet/react-pixi";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { displayStateSelector } from "../atoms/display";
+import { useRecoilValue } from "recoil";
 
-const bpm = 120;
+// const bpm = 120;
 const heartbeat = (elapsed: number, duration: number) => {
   if (elapsed / duration <= 0.3) {
     return 1.6 * (elapsed / duration) + 1;
@@ -21,8 +23,9 @@ const heartbeat = (elapsed: number, duration: number) => {
 type RotateLogoProps = {
   parentWidth: number;
   parentHeight: number;
+  bpm: number;
 };
-const RotateLogo = ({ parentWidth, parentHeight }: RotateLogoProps) => {
+const RotateLogo = ({ parentWidth, parentHeight, bpm }: RotateLogoProps) => {
   const app = useApp();
   const oneBeatMillis = (60.0 / bpm) * 1000;
   const [rotation, setRotation] = useState(0);
@@ -48,6 +51,32 @@ const RotateLogo = ({ parentWidth, parentHeight }: RotateLogoProps) => {
 
 export const PixiRotateLogo = () => {
   const body = document.getElementsByTagName("body")[0];
+  const display = useRecoilValue(displayStateSelector);
+  const [bpm, setBpm] = useState(120);
+  const onStorageChange = (event) => {
+    // console.log(JSON.parse(event.newValue));
+    console.log("onStorageChanges");
+    if (event.key === "displayStateSelector") {
+      const value = JSON.parse(event.newValue);
+      setBpm(value.bpm);
+      console.log("called", bpm);
+    }
+  };
+
+  useEffect(() => {
+    const state = JSON.parse(localStorage.getItem("displayStateSelector"));
+    setBpm(state.bpm);
+  }, []);
+  useEffect(() => {
+    console.log(display);
+  }, []);
+  useEffect(() => {
+    window.addEventListener("storage", onStorageChange);
+    return () => {
+      window.removeEventListener("storage", onStorageChange);
+    };
+  }, [bpm]);
+
   return (
     <Stage
       width={body.clientWidth}
@@ -57,6 +86,7 @@ export const PixiRotateLogo = () => {
       <RotateLogo
         parentWidth={body.clientWidth}
         parentHeight={body.clientHeight}
+        bpm={bpm}
       />
     </Stage>
   );
