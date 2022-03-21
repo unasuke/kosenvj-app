@@ -85,6 +85,7 @@ export const Monitor = () => {
                       <Box key={v}>
                         <video
                           muted
+                          loop
                           src={v}
                           width={"300px"}
                           onClick={() => onSelectVideo(v)}
