@@ -10,6 +10,7 @@ import { Monitor } from "./components/monitor";
 import { Roll } from "./sketches/roll";
 import { PixiRotateLogo } from "./components/PixiRotateLogo";
 import { PixiTextTile } from "./components/PixiTextTile";
+import { Front } from "./components/Front";
 
 function App() {
   return (
@@ -36,6 +37,9 @@ function App() {
         <Route path="/pixi">
           {/* <PixiRotateLogo /> */}
           <PixiTextTile />
+        </Route>
+        <Route path="/front">
+          <Front />
         </Route>
       </div>
     </RecoilRoot>

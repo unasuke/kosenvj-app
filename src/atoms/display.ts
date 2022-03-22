@@ -6,6 +6,7 @@ type Display = {
   shaderList: string[];
   currentShader: string;
   bpm: number;
+  front: string;
 };
 
 const videoFiles = [
@@ -101,6 +102,7 @@ export const displayState = atom<Display>({
     shaderList: shaderList,
     currentShader: shaderList[0],
     bpm: 120,
+    front: "tile",
   },
 });
 

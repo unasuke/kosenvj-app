@@ -98,6 +98,24 @@ export const Monitor = () => {
             <SliderThumb />
           </Slider>
         </Box>
+        <Box w="200px" p={10}>
+          <Stack spacing={4}>
+            <Button
+              onClick={() => {
+                setDisplaySelector({ ...display, front: "tile" });
+              }}
+            >
+              Tile
+            </Button>
+            <Button
+              onClick={() => {
+                setDisplaySelector({ ...display, front: "rolling" });
+              }}
+            >
+              Rolling
+            </Button>
+          </Stack>
+        </Box>
       </Flex>
       <Flex flexDirection={"row"}>
         <Box>

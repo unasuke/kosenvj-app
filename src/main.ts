@@ -33,7 +33,7 @@ app.whenReady().then(() => {
       // preload: "dist/preload.js"
     },
   });
-  win.loadURL("http://localhost:5000/rolling");
+  win.loadURL("http://localhost:5000/front");
   win.addListener("resize", () => {
     debounce(() => {
       win.reload();
