@@ -134,7 +134,7 @@ export const Monitor = () => {
                           muted
                           loop
                           src={v}
-                          width={"300px"}
+                          width={"150px"}
                           onClick={() => onSelectVideo(v)}
                           style={{
                             borderWidth:
