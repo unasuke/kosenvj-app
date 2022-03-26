@@ -92,6 +92,7 @@ const shaderList = [
   "rgbGlitch",
   "rgbShift",
   "halftone",
+  "none",
 ];
 
 export const displayState = atom<Display>({

@@ -29,16 +29,20 @@ function VideoSelector({
   shaderName: string;
 }) {
   const display = useRecoilValue(displayState);
-  return (
-    <VFXVideo
-      src={videoName}
-      shader={shaderName}
-      autoPlay
-      muted
-      width={"100%"}
-      loop
-    />
-  );
+  const videoComponent =
+    shaderName === "none" ? (
+      <video src={videoName} autoPlay muted width={"100%"} loop />
+    ) : (
+      <VFXVideo
+        src={videoName}
+        shader={shaderName}
+        autoPlay
+        muted
+        width={"100%"}
+        loop
+      />
+    );
+  return videoComponent;
 }
 
 export function VFXTest() {
