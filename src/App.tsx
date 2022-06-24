@@ -11,6 +11,7 @@ import { Roll } from "./sketches/roll";
 import { PixiRotateLogo } from "./components/PixiRotateLogo";
 import { PixiTextTile } from "./components/PixiTextTile";
 import { Front } from "./components/Front";
+import { GamepadHandler } from "./components/GamepadHandler";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         </Route>
         <Route path="/midi">{/* <Midi /> */}</Route>
         <Route path="/monitor">
+          <GamepadHandler />
           <Monitor />
         </Route>
         <Route path="/pixi">
