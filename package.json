@@ -9,7 +9,7 @@
     "electron:main:watch": "tsc src/main.ts --outDir dist/ --watch",
     "electron:preload": "tsc src/preload.ts --outDir dist/",
     "electron:preload:watch": "tsc src/preload.ts --outDir dist/ --watch",
-    "electron": "electron dist/main.js",
+    "electron": "electron --enable-logging=log.txt dist/main.js",
     "dev:electron": "npm-run-all electron:main electron:preload --parallel dev electron"
   },
   "dependencies": {

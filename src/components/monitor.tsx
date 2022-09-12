@@ -51,8 +51,12 @@ export const Monitor = () => {
   };
 
   useEffect(() => {
-    // console.warn(window.electron.getVideoList().then(l => {console.log(l)}).catch(e => {console.warn(e)}))
-    console.warn(window.electron.getVideoList());
+    // console.log(window.Electron.getVideolist().then());
+    window.electron.getVideoList().then((res: any) => {
+      // setDisplaySelector({ ...displaySelector, videoList: res.list });
+    });
+    // );
+    // console.warn(window.electron.getVideoList().then());
   }, []);
 
   return (

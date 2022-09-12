@@ -4,6 +4,7 @@ import { displayState } from "../atoms/display";
 import { noWait, selector, useRecoilState, useRecoilValue } from "recoil";
 // import { Circle } from "@react-three/drei";
 import { useEffect, useState } from "react";
+import { StyledStepper } from "@chakra-ui/react";
 
 const shaderList = [
   // "uvGradient",
@@ -62,6 +63,12 @@ export function VFXTest() {
 
   useEffect(() => {
     const state = JSON.parse(localStorage.getItem("displayStateSelector"));
+    state.videoList.map((list) => {
+      console.log(list);
+      fetch(list).then((res) => {
+        return null;
+      });
+    });
     setVideo(state.currentVideo);
     setShader(state.currentShader);
   }, []);
@@ -72,9 +79,8 @@ export function VFXTest() {
       window.removeEventListener("storage", onStorageChange);
     };
   }, [video, shader]);
-  const now = () => {
-    return new Date();
-  };
+
+  useEffect(() => {}, []);
 
   return (
     <VFXProvider>

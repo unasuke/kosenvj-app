@@ -23,32 +23,33 @@ const syncWindowPisitions = (x: number, y: number) => {
 };
 
 app.whenReady().then(() => {
-  win = new BrowserWindow({
-    ...SIZE,
-    // frame: false,
-    // titleBarStyle: "hidden",
-    autoHideMenuBar: true,
-    opacity: 0.5,
-    webPreferences: {
-      // preload: "dist/preload.js"
-    },
-  });
-  win.loadURL("http://localhost:5000/front");
-  win.addListener("resize", () => {
-    debounce(() => {
-      win.reload();
-    }, 500);
-    win.reload();
-  });
-  win.addListener("move", () => {
-    const p = win.getPosition();
-    syncWindowPisitions(p[0], p[1]);
-  });
+  // win = new BrowserWindow({
+  //   ...SIZE,
+  //   // frame: false,
+  //   // titleBarStyle: "hidden",
+  //   autoHideMenuBar: true,
+  //   // opacity: 0.5,
+  //   webPreferences: {
+  //     // preload: "dist/preload.js"
+  //   },
+  // });
+  // win.loadURL("http://localhost:5000/front");
+  // win.addListener("resize", () => {
+  //   debounce(() => {
+  //     win.reload();
+  //   }, 500);
+  //   win.reload();
+  // });
+  // win.addListener("move", () => {
+  //   const p = win.getPosition();
+  //   syncWindowPisitions(p[0], p[1]);
+  // });
 
   videoWin = new BrowserWindow({
     ...SIZE,
     // frame: false,
     // titleBarStyle: "hidden",
+    // opacity: 0.5,
     autoHideMenuBar: true,
     webPreferences: {
       contextIsolation: true,
@@ -77,12 +78,18 @@ app.whenReady().then(() => {
     },
   });
   monitorWin.loadURL("http://localhost:5000/monitor");
-  // monitorWin.webContents.openDevTools();
+  monitorWin.webContents.openDevTools();
 });
 
 ipcMain.handle("get-video-list", async () => {
-  // const list = fs.readdirSync("assets");
-  // console.log(list)
+  const list = fs.readdirSync("assets");
+  list.map((i) => {
+    console.log(`"/assets/${i}",`);
+  });
   console.warn("invoked");
-  return JSON.stringify({ a: "b" });
+  return {
+    list: list.map((i) => {
+      return `/assets/${i}`;
+    }),
+  };
 });

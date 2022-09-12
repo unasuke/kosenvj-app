@@ -11,13 +11,15 @@ import { Roll } from "./sketches/roll";
 import { PixiRotateLogo } from "./components/PixiRotateLogo";
 import { PixiTextTile } from "./components/PixiTextTile";
 import { Front } from "./components/Front";
+import { YouTubeVideo } from "./components/YouTubeVideo";
 import { GamepadHandler } from "./components/GamepadHandler";
 
 function App() {
   return (
     <RecoilRoot>
       <div className="App">
-        <HandleMidi />
+        {/* <HandleMidi /> */}
+        <GamepadHandler />
         <div id="sketch" />
         <Route path="/kosendj">
           <PixiTextTile />
@@ -33,7 +35,6 @@ function App() {
         </Route>
         <Route path="/midi">{/* <Midi /> */}</Route>
         <Route path="/monitor">
-          <GamepadHandler />
           <Monitor />
         </Route>
         <Route path="/pixi">
@@ -42,6 +43,9 @@ function App() {
         </Route>
         <Route path="/front">
           <Front />
+        </Route>
+        <Route path="/yt">
+          <YouTubeVideo />
         </Route>
       </div>
     </RecoilRoot>

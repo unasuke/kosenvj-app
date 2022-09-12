@@ -43,8 +43,8 @@ const RotateLogo = ({ parentWidth, parentHeight, bpm }: RotateLogoProps) => {
       x={app.screen.width / 2}
       y={app.screen.height / 2}
       anchor={0.5}
-      scale={{ x: size * 0.4, y: size * 0.4 }}
-      rotation={rotation}
+      // scale={{ x: size * 0.4, y: size * 0.4 }}
+      // rotation={rotation}
     />
   );
 };
